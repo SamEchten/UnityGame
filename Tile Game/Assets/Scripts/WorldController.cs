@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class WorldController : MonoBehaviour
 {
     Inventory inventory;
-    [SerializeField]
-    GameObject woodText;
+    
+    //UI fields
+    public GameObject woodObj;
+    public GameObject stoneObj;
+    public GameObject goldObj;
 
-    public Camera cam;
+    TextMeshProUGUI woodText;
+    //TextMeshPro stoneText;
+    //TextMeshPro goldText;
+
+    Camera cam;
     GameObject[] tiles;
      
     float spawnInterval;
@@ -18,6 +26,11 @@ public class WorldController : MonoBehaviour
     void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("inventory").GetComponent<Inventory>();
+
+        //UI
+        woodText = woodObj.GetComponent<TextMeshProUGUI>();
+        //stoneText = stoneObj.GetComponent<TextMeshPro>();
+        //goldText = goldObj.GetComponent<TextMeshPro>();
 
         cam = Camera.main;
         tiles = GameObject.FindGameObjectsWithTag("tile");
@@ -65,9 +78,21 @@ public class WorldController : MonoBehaviour
     private void mineableHandler(Mineable mineable)
     {
         //Harvest resourse from mineable
-        Item resource = mineable.harvest();
-        inventory.add(resource);
-        woodText.GetComponent<TextMeshProUGUI>().text = "test";
+        mineable.harvest();
+        if(mineable is Tree)
+        {
+            inventory.wood++;
+        } else if(mineable is Rock)
+        {
+            inventory.stone++;
+        }
+
+        updateResourceUI();
+    }
+
+    private void updateResourceUI()
+    {
+        woodText.text = "Wood: " + inventory.wood.ToString();
     }
 
     private GameObject rayCastHit()

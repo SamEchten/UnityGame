@@ -6,9 +6,12 @@ public class Tree : Mineable
 {
     Rigidbody rb;
     bool colliding;
+    bool harvested;
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        harvested = false;
     }
 
     void Update()
@@ -16,11 +19,14 @@ public class Tree : Mineable
         
     }
 
-    override public Resource harvest()
+    override public void harvest()
     {
-        Debug.Log("Harvesting Wood");
-        fall();
-        return new Wood();
+        if(!harvested)
+        {
+            Debug.Log("Harvesting Wood");
+            fall();
+            harvested = true;
+        }
     }
 
     private void fall()

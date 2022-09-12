@@ -9,7 +9,7 @@ public abstract class Mineable : MonoBehaviour
         
     }
 
-    abstract public Resource harvest();
+    abstract public void harvest();
 
 }
 

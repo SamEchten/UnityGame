@@ -16,9 +16,8 @@ public class Rock : Mineable
         
     }
 
-    override public Resource harvest()
+    override public void harvest()
     {
         Debug.Log("Harvesting Rock");
-        return null;
     }
 }

@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    private GameObject placeholder;
-    private LayerMask tag;
     // Start is called before the first frame update
     void Start()
     {
-        placeholder = GameObject.Find("MineablePlaceholder");
-        tag = LayerMask.GetMask("Tile");
+
     }
 
     // Update is called once per frame
