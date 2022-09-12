@@ -8,7 +8,6 @@ public class CameraController2 : MonoBehaviour
     public float panSpeed = 1f;
     public float border = 15f;
     private Vector3 startPos;
-    public float step;
     void Start()
     {
         startPos = transform.position;
@@ -18,7 +17,7 @@ public class CameraController2 : MonoBehaviour
     void Update()
     {
         Vector3 mousePos = Input.mousePosition;
-        Vector3 camPos = transform.position;
+        Vector3 camPos = transform.localPosition;
 
         //Debug.Log(mousePos);
         //Debug.Log(Screen.height);
@@ -46,6 +45,6 @@ public class CameraController2 : MonoBehaviour
             camPos.x -= panSpeed * Time.deltaTime;
         }
 
-        transform.position = camPos;
+        transform.localPosition = camPos;
     }
 }
