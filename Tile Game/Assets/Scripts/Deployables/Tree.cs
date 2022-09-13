@@ -6,7 +6,6 @@ public class Tree : Mineable
 {
     Rigidbody rb;
     bool colliding;
-    bool harvested;
 
     void Start()
     {
@@ -19,14 +18,12 @@ public class Tree : Mineable
         
     }
 
-    override public void harvest()
+    override public Resource harvest()
     {
-        if(!harvested)
-        {
-            Debug.Log("Harvesting Wood");
-            fall();
-            harvested = true;
-        }
+        Debug.Log("Harvesting Wood");
+        fall();
+        harvested = true;
+        return new Wood();
     }
 
     private void fall()

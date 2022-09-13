@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wood : MonoBehaviour, Resource
+public class Wood : Resource
 {
     void Start()
     {

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public abstract class Mineable : MonoBehaviour
 {
+    public bool harvested;
     void Start()
     {
         
     }
 
-    abstract public void harvest();
+    abstract public Resource harvest();
 
 }
 

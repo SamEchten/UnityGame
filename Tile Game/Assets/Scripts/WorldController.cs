@@ -6,17 +6,10 @@ using UnityEngine.UI;
 
 public class WorldController : MonoBehaviour
 {
-    Inventory inventory;
-    
     //UI fields
-    public GameObject woodObj;
-    public GameObject stoneObj;
-    public GameObject goldObj;
+    public GameObject resourcePanel;
 
-    TextMeshProUGUI woodText;
-    //TextMeshPro stoneText;
-    //TextMeshPro goldText;
-
+    Inventory inventory;
     Camera cam;
     GameObject[] tiles;
      
@@ -26,12 +19,6 @@ public class WorldController : MonoBehaviour
     void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("inventory").GetComponent<Inventory>();
-
-        //UI
-        woodText = woodObj.GetComponent<TextMeshProUGUI>();
-        //stoneText = stoneObj.GetComponent<TextMeshPro>();
-        //goldText = goldObj.GetComponent<TextMeshPro>();
-
         cam = Camera.main;
         tiles = GameObject.FindGameObjectsWithTag("tile");
 
@@ -78,22 +65,15 @@ public class WorldController : MonoBehaviour
     private void mineableHandler(Mineable mineable)
     {
         //Harvest resourse from mineable
-        mineable.harvest();
-        if(mineable is Tree)
+        if (!mineable.harvested)
         {
-            inventory.wood++;
-        } else if(mineable is Rock)
-        {
-            inventory.stone++;
+            Resource resource = mineable.harvest();
+            inventory.addResource(resource);
         }
 
-        updateResourceUI();
+        inventory.test();
     }
 
-    private void updateResourceUI()
-    {
-        woodText.text = "Wood: " + inventory.wood.ToString();
-    }
 
     private GameObject rayCastHit()
     {
